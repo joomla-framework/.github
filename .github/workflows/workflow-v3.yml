@@ -21,7 +21,6 @@ jobs:
                   git config --global --add safe.directory $GITHUB_WORKSPACE
                   composer config --global home
                   composer install --no-progress --ignore-platform-reqs
-                  composer require phpmd/phpmd phpstan/phpstan
 
     code-style-php:
         name: Check PHP code style
@@ -52,37 +51,7 @@ jobs:
                   key: ${{ runner.os }}-composer-${{ hashFiles('composer.json') }}
             - name: Run PHPstan
               run: |
-                  ./vendor/bin/phpstan --error-format=github || :
-
-    phploc:
-        name: Run PHPloc
-        runs-on: ubuntu-latest
-        container: joomlaprojects/docker-images:php8.1
-        needs: [code-style-php]
-        steps:
-            - uses: actions/checkout@v4
-            - uses: actions/cache/restore@v4
-              with:
-                  path: vendor
-                  key: ${{ runner.os }}-composer-${{ hashFiles('composer.json') }}
-            - name: Run PHPloc
-              run: |
-                  ./vendor/bin/phploc src
-
-    phpcpd:
-        name: Run phpcpd
-        runs-on: ubuntu-latest
-        container: joomlaprojects/docker-images:php8.1
-        needs: [code-style-php]
-        steps:
-            - uses: actions/checkout@v4
-            - uses: actions/cache/restore@v4
-              with:
-                  path: vendor
-                  key: ${{ runner.os }}-composer-${{ hashFiles('composer.json') }}
-            - name: Run phpcpd
-              run: |
-                  ./vendor/bin/phpcpd src
+                  ./vendor/bin/phpstan --error-format=github
 
     tests-unit-lowest:
         name: Run Unit tests
