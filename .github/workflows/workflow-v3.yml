@@ -62,6 +62,7 @@ jobs:
             - uses: actions/checkout@v4
             - name: Run Unit tests
               run: |
+                  git config --global --add safe.directory $GITHUB_WORKSPACE
                   composer install --prefer-lowest
                   ./vendor/bin/phpunit
 
@@ -77,5 +78,6 @@ jobs:
             - uses: actions/checkout@v4
             - name: Run Unit tests
               run: |
+                  git config --global --add safe.directory $GITHUB_WORKSPACE
                   composer install
                   ./vendor/bin/phpunit
