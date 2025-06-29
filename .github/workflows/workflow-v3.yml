@@ -63,7 +63,7 @@ jobs:
             - name: Run Unit tests
               run: |
                   git config --global --add safe.directory $GITHUB_WORKSPACE
-                  composer install --prefer-lowest
+                  composer update --prefer-stable --prefer-lowest
                   ./vendor/bin/phpunit
 
     tests-unit:
@@ -79,5 +79,5 @@ jobs:
             - name: Run Unit tests
               run: |
                   git config --global --add safe.directory $GITHUB_WORKSPACE
-                  composer install
+                  composer update
                   ./vendor/bin/phpunit
